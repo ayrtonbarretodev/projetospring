@@ -16,11 +16,8 @@ import java.util.List;
 @RequestMapping(value = "/categorias")
 public class CategoriaResources {
 
+    @Autowired
     private CategoriaService categoriaService;
-
-    public CategoriaResources (final CategoriaService categoriaService){
-        this.categoriaService = categoriaService;
-    }
 
     @RequestMapping(value = "/{id}", method = RequestMethod.GET)
     public ResponseEntity<?> find(@PathVariable Integer id){
