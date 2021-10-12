@@ -1,8 +1,12 @@
 package com.br.ayrton.projetospring;
 
 import com.br.ayrton.projetospring.domain.Categoria;
+import com.br.ayrton.projetospring.domain.Cidade;
+import com.br.ayrton.projetospring.domain.Estado;
 import com.br.ayrton.projetospring.domain.Produto;
 import com.br.ayrton.projetospring.repositories.CategoriaRepository;
+import com.br.ayrton.projetospring.repositories.CidadeRepository;
+import com.br.ayrton.projetospring.repositories.EstadoRepository;
 import com.br.ayrton.projetospring.repositories.ProdutoRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
@@ -18,6 +22,10 @@ public class ProjetospringApplication implements CommandLineRunner {
     private CategoriaRepository categoriaRepository;
     @Autowired
     private ProdutoRepository produtoRepository;
+    @Autowired
+    private EstadoRepository estadoRepository;
+    @Autowired
+    private CidadeRepository cidadeRepository;
 
     public ProjetospringApplication(final CategoriaRepository categoriaRepository) {
         this.categoriaRepository = categoriaRepository;
@@ -46,5 +54,17 @@ public class ProjetospringApplication implements CommandLineRunner {
         categoriaRepository.saveAll(Arrays.asList(cat1,cat2));
         produtoRepository.saveAll(Arrays.asList(p1,p2,p3));
 
+        Estado est1 = new Estado(null, "Minas Gerais");
+        Estado est2 = new Estado(null, "São Paulo");
+
+        Cidade c1 = new Cidade(null,"Uberlândia",est1);
+        Cidade c2 = new Cidade(null,"São Paulo",est2);
+        Cidade c3 = new Cidade(null,"Campinas",est2);
+
+        est1.getCidades().addAll(Arrays.asList(c1));
+        est2.getCidades().addAll(Arrays.asList(c2,c3));
+
+        estadoRepository.saveAll(Arrays.asList(est1,est2));
+        cidadeRepository.saveAll(Arrays.asList(c1,c2,c3));
     }
 }
