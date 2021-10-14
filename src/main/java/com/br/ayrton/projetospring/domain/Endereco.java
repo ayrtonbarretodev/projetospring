@@ -1,5 +1,6 @@
 package com.br.ayrton.projetospring.domain;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
@@ -31,6 +32,7 @@ public class Endereco implements Serializable {
         this.cidade = cidade;
     }
 
+    @JsonBackReference
     @ManyToOne
     @JoinColumn(name = "cliente_id")
     private Cliente cliente;
